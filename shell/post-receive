@@ -1,0 +1,11 @@
+#!/bin/bash
+while read oldrev newrev ref
+do
+    if [[ $ref =~ .*/master$ ]];
+    then
+        echo "Master received. Deploying master to production..."
+        /bin/bash /home/USER/deploy.sh > /home/USER/deploy.log 2>&1 &
+    else
+        echo "$ref received. No deployment for $ref set up."
+    fi
+done
